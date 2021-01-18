@@ -6,21 +6,26 @@ const int COLS = 7;
 
 // ПРОТОТИПЫ 
 void FillRand(int arr[], const int n);
+void FillRand(double arr[], const int n);
+void FillRand(char arr[], const int n);
 
 void FillRand(int arr[ROWS][COLS], const int m, const int n);
+void FillRand(double arr[ROWS][COLS], const int m, const int n);
+void FillRand(char arr[ROWS][COLS], const int m, const int n);
 
-void Print(int arr[], const int n);
+template<typename T>
+void Print(T arr[], const int n);
+template<typename T>
+void Print(T arr[ROWS][COLS], const int m, const int n);
 
-void Print(int arr[ROWS][COLS], const int m, const int n);
+template<typename T>
+void Sort(T arr[], const int n);
 
-void Sort(int arr[], const int n);
+template<typename T>
+T Sum(T arr[], const int n);
 
-int Sum(int arr [], const int n);
-double Sum (double arr[], const int n);
-
-double Avg(int arr[], const int n);
-double Avg(double arr[], const int n);
-
+template<typename T>
+double Avg(T arr[], const int n);
 
 #define delimiter "\n-------------------------------\n"
 
@@ -33,7 +38,7 @@ void main()
 	Print(arr, n);
 	Sort(arr, n);
 	Print(arr, n);
-	cout << "Cумма элементов массива ; " << Sum(arr,n) << endl;
+	cout << "Cумма элементов массива ; " << Sum(arr, n) << endl;
 	cout << "Среднее арифметическое : " << Avg(arr, n) << endl;
 	cout << delimiter << endl;
 
@@ -73,6 +78,20 @@ void FillRand(int arr[], const int n)
 		arr[i] = rand() % 100;
 	}
 }
+void FillRand(double arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		arr[i] = double(rand() % 100) / 10;
+	}
+}
+void FillRand(char arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		arr[i] = rand();
+	}
+}
 
 void FillRand(int arr[ROWS][COLS], const int m, const int n)// двумерный массив// двумерный массив
 {
@@ -83,10 +102,30 @@ void FillRand(int arr[ROWS][COLS], const int m, const int n)// двумерный массив/
 			arr[i][j] = rand() % 100;
 		}
 	}
-} 
+}
+void FillRand(double arr[ROWS][COLS], const int m, const int n)// двумерный массив// двумерный массив
+{
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			arr[i][j] = double(rand() % 100)/10;
+		}
+	}
+}
+void FillRand(char arr[ROWS][COLS], const int m, const int n)// двумерный массив// двумерный массив
+{
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			arr[i][j] = rand();
+		}
+	}
+}
 
-
-void Print(int arr[], const int n)
+template<typename T>
+void Print(T arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -95,7 +134,8 @@ void Print(int arr[], const int n)
 	cout << endl;
 }
 
-void Print(int arr[ROWS][COLS], const int m, const int n) // двумерный массив 
+template<typename T>
+void Print(T arr[ROWS][COLS], const int m, const int n) // двумерный массив 
 {
 	for (int i = 0; i < m; i++)
 	{
@@ -103,12 +143,12 @@ void Print(int arr[ROWS][COLS], const int m, const int n) // двумерный массив
 		{
 			cout << arr[i][j] << "\t";
 		}
-	cout << endl;
+		cout << endl;
 	}
 }
 
-
-void Sort(int arr[], const int n)
+template<typename T>
+void Sort(T arr[], const int n)
 {
 	//сортировка:
 	for (int i = 0; i < n; i++)
@@ -128,7 +168,8 @@ void Sort(int arr[], const int n)
 	}
 }
 
-int Sum(int arr[], const int n)
+template<typename T>
+T Sum(T arr[], const int n)
 {
 	int Sum = 0;
 	for (int i = 0; i < n; i++)
@@ -138,44 +179,8 @@ int Sum(int arr[], const int n)
 	return Sum;
 }
 
-
-double Sum(double arr[],const int n)
+template<typename T>
+double Avg(T arr[], const int n)
 {
-	double Sum = 0;
-	for (int i = 0; i < n; i++)
-	{
-		Sum += arr[i];
-	}
-	return Sum;
+	return (double)Sum(arr, n) / n;
 }
-
-double Avg(int arr[], const int n)
-
-
-	//double Avg = Sum(arr, n) / n /// return (double} Sum
-	{
-		return (double)Sum(arr,n) / n;
-	}
-	
-	
-
-double Avg(double arr[], const int n)
-{
-		return Sum(arr,n) / n;
-}
-
-	
-	
-	
-
-
-
-
-
-
-
-	
-
-
-
-
